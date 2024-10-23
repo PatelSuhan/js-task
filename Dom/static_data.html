@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Data</title>
+</head>
+<body>
+    <table border="1" cellspacing="0" width="500px">
+        <thead>
+            <tr>
+                <th>sr no.</th>
+                <th>Name</th>
+                <th>roll num</th>
+                <th>std</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="table_data">
+            
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+
+    let data = [
+    {name:"student_1",Roll_num:1,std:9},
+    {name:"student_2",Roll_num:2,std:9},
+    {name:"student_3",Roll_num:3,std:9},
+    {name:"student_4",Roll_num:4,std:9},
+    {name:"student_5",Roll_num:5,std:9},
+    {name:"student_6",Roll_num:6,std:9},
+]
+
+    let table_data = document.getElementById("table_data")
+    let tr = ""
+
+    data.map((e,i) => {
+
+        tr += `
+
+            <tr>
+                <td>${i + 1}</td>
+                <td>${e.name}</td>
+                <td>${e.Roll_num}</td>
+                <td>${e.std}</td>
+                <td><button>edit</button> <button>Remove</button></td>
+            </tr>
+
+        `
+
+        table_data.innerHTML = tr
+
+    })
+
+</script>

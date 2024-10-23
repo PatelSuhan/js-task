@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form action="" id="form" onsubmit="submit(event)">
+        <input type="text" placeholder="name" id="name">
+        <br><br>
+        <input type="password" placeholder="password" id="password">
+        <br><br>
+        <button>Submit</button>
+    </form>
+</body>
+</html>
+<script>
+    let form = document.getElementById("form")
+    
+    const submit = (event) => {
+        event.preventDefaulte()
+        let name = getElementById("name").value
+        let password = getElementById("password").value
+    }
+
+    
+</script>

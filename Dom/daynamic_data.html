@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daynamic_data</title>
+</head>
+<body>
+    <form id="form" onsubmit="formsubmit(event)">
+        <input type="text" placeholder="Enter Name" id="name">
+        <br><br>
+        <input type="password" placeholder="Password" id="password">
+        <br><br>
+        <button type="submit" id="btn">Submit</button>
+    </form>
+    <br><br><br><br><br>
+    <table border="2" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Sr no.</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="9">
+            
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+
+    let form = document.getElementById("form")
+
+    const formsubmit = (event) => {
+
+        event.preventDefault()
+        
+        let name =document.getElementById("name").value
+        let password =document.getElementById("password").value
+
+        let obj = {
+            Name : name,
+            Password : password
+        }
+
+        let arr = JSON.parse(localStorage.getItem("formdata")) || []
+
+        arr.push(obj)
+
+        localStorage.setItem("formdata",JSON.stringify(arr))
+
+        
+        
+        // localStorage.setItem("UserName",name)
+        // localStorage.setItem("Password",password)
+        
+        
+        event.target.reset()
+        showdata()
+
+    }
+    
+
+
+
+
+    const showdata = () => {
+        let updatedData = JSON.parse(localStorage.getItem("formdata"))
+        // let tabledata = document.getElementById("tabledata")
+        let tr = ""
+
+        updatedData.map((ele,index) => {
+
+            tr += `
+
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${ele.Name}</td>
+                    <td>${ele.Password}</td>
+                    <td><button onclick="editData(${index})">edit</button> <button onclick="deletData(${index})">Remove</button></td>
+                </tr>
+
+            `
+
+            
+        })
+
+        document.getElementById("tabledata").innerHTML = tr
+
+    }
+    
+    const deletData = (i) => {
+        let updatedData = JSON.parse(localStorage.getItem("formdata"))
+        updatedData.splice(i, 1)
+        localStorage.setItem("formdata", JSON.stringify(updatedData))
+        showdata()
+    }
+
+
+    
+    const editData = (index) => {
+        let updatedData = JSON.parse(localStorage.getItem("formdata"))
+        let detail = updatedData[index]
+
+        document.getElementById("name").value = detail.Name
+        document.getElementById("password").value = detail.Password
+        
+        document.getElementById("btn").innerHTML = "update"
+
+        
+    }
+    
+    showdata()
+    
+    
+    
+    
+</script>
